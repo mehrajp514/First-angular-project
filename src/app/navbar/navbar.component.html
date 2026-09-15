@@ -1,0 +1,50 @@
+<header class="header">
+  <div class="header-content">
+    <a routerLink="/home" class="logo" (click)="closeMobileMenu()">Shop<span>Hub</span></a>
+
+    <form class="search-form" (ngSubmit)="onSearch()">
+      <input type="text" [(ngModel)]="searchQuery" name="search" placeholder="Search products…" autocomplete="off">
+      <button type="submit" aria-label="Search">🔍</button>
+    </form>
+
+    <nav class="nav" [class.open]="mobileMenuOpen">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Products</a>
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">About</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact</a>
+      <a routerLink="/orders" routerLinkActive="active" *ngIf="authService.isLoggedIn()" (click)="closeMobileMenu()">My Orders</a>
+      <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.isAdmin()" (click)="closeMobileMenu()">Admin</a>
+
+      <div class="mobile-only-links">
+        <a routerLink="/wishlist" (click)="closeMobileMenu()">Wishlist ({{ wishlistCount }})</a>
+        <a routerLink="/profile" *ngIf="authService.isLoggedIn()" (click)="closeMobileMenu()">Profile</a>
+        <a routerLink="/login" *ngIf="!authService.isLoggedIn()" (click)="closeMobileMenu()">Login</a>
+        <a href="javascript:void(0)" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</a>
+      </div>
+    </nav>
+
+    <div class="actions">
+      <button class="icon-btn theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+        {{ isDark ? '☀️' : '🌙' }}
+      </button>
+
+      <a routerLink="/wishlist" class="icon-btn wishlist-link" title="Wishlist">
+        ♥
+        <span class="badge" *ngIf="wishlistCount > 0">{{ wishlistCount }}</span>
+      </a>
+
+      <a routerLink="/cart" class="icon-btn cart-link" title="Cart">
+        🛒
+        <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+      </a>
+
+      <a routerLink="/profile" class="icon-btn profile-link" *ngIf="authService.isLoggedIn()" title="Profile">👤</a>
+      <a routerLink="/login" class="btn-login-nav" *ngIf="!authService.isLoggedIn()">Login</a>
+      <a href="javascript:void(0)" class="btn-logout-nav" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</a>
+
+      <button class="hamburger" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>

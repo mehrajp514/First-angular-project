@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="wishlist-content">
+  <h1 class="page-title">My Wishlist</h1>
+
+  <div class="wishlist-grid" *ngIf="items.length > 0">
+    <div class="wishlist-card card fade-in-up" *ngFor="let item of items">
+      <div class="item-image" (click)="viewProduct(item.id)">
+        <img [src]="item.image" [alt]="item.name">
+      </div>
+      <div class="item-info">
+        <h3 (click)="viewProduct(item.id)">{{ item.name }}</h3>
+        <p class="category">{{ item.category }}</p>
+        <p class="price">${{ item.price }}</p>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary" (click)="moveToCart(item)">Add to Cart</button>
+        <button class="btn-remove" (click)="remove(item.id)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="items.length === 0">
+    <p>Your wishlist is empty. Tap the ♥ on any product to save it here.</p>
+    <button class="btn btn-primary" routerLink="/products">Browse Products</button>
+  </div>
+</div>
+
+<app-footer></app-footer>

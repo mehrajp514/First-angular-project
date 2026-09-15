@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+
+<div class="home-container">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="banner-content fade-in-up">
+      <span class="eyebrow">Limited time offer</span>
+      <h2>Smartphone Savings</h2>
+      <p>Up to 50% off on the latest smartphones and accessories</p>
+      <button class="btn btn-hero" routerLink="/products">Shop Now →</button>
+    </div>
+  </section>
+
+  <!-- Features strip -->
+  <section class="features-strip">
+    <div class="feature" *ngFor="let feature of features">
+      <span class="feature-icon">{{ feature.icon }}</span>
+      <div>
+        <h4>{{ feature.title }}</h4>
+        <p>{{ feature.text }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories-section">
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories-grid">
+      <div class="category-card card" *ngFor="let category of categories" (click)="viewCategory(category.name)">
+        <img [src]="category.image" [alt]="category.name">
+        <h3>{{ category.name }}</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products-section">
+    <h2 class="section-title">Top Products</h2>
+
+    <div class="products-grid" *ngIf="!loading">
+      <div class="product-card card" *ngFor="let product of products" (click)="viewProduct(product.id)">
+        <button class="wishlist-btn" (click)="toggleWishlist($event, product)" [class.active]="wishlistService.isInWishlist(product.id)">♥</button>
+        <img [src]="product.image" [alt]="product.name">
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="category">{{ product.category }}</p>
+          <div class="rating">
+            <span *ngFor="let star of product.rating | stars">★</span>
+          </div>
+          <p class="price">${{ product.price }}</p>
+          <button class="btn-add-cart" (click)="addToCart($event, product)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-grid" *ngIf="loading">
+      <div class="product-card card skeleton-card" *ngFor="let s of [].constructor(8)">
+        <div class="skeleton" style="height: 200px;"></div>
+        <div class="product-info">
+          <div class="skeleton" style="height: 1rem; width: 70%; margin-bottom: 0.5rem;"></div>
+          <div class="skeleton" style="height: 0.8rem; width: 40%; margin-bottom: 0.5rem;"></div>
+          <div class="skeleton" style="height: 1.2rem; width: 30%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>

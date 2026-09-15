@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="orders-content">
+  <h1 class="page-title">My Orders</h1>
+
+  <div class="status-tabs" *ngIf="orders.length > 0">
+    <button *ngFor="let status of statusFilters"
+            [class.active]="activeFilter === status"
+            (click)="setFilter(status)">{{ status }}</button>
+  </div>
+
+  <div class="orders-list" *ngIf="filteredOrders.length > 0">
+    <div class="order-card card" *ngFor="let order of filteredOrders">
+      <div class="order-header">
+        <div class="order-info">
+          <h3>Order #{{ order.id }}</h3>
+          <p class="order-date">{{ order.date }}</p>
+        </div>
+        <span class="order-status" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of order.items">
+          <div class="item-details">
+            <h4>{{ item.name }}</h4>
+            <p>Qty: {{ item.quantity }}</p>
+          </div>
+          <p class="item-price">${{ (item.price * item.quantity).toFixed(2) }}</p>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <div class="shipping-info">
+          <p><strong>Shipping Address:</strong> {{ order.shippingAddress }}</p>
+        </div>
+        <div class="order-total">
+          <p>Total: <span>${{ order.total.toFixed(2) }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-orders" *ngIf="!loading && orders.length === 0">
+    <p>You have no orders yet.</p>
+    <button class="btn btn-primary" routerLink="/products">Start Shopping</button>
+  </div>
+
+  <div class="no-orders" *ngIf="!loading && orders.length > 0 && filteredOrders.length === 0">
+    <p>No {{ activeFilter.toLowerCase() }} orders.</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

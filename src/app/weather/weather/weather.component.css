@@ -1,0 +1,153 @@
+.weather-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  min-height: calc(100vh - var(--header-height) - 260px);
+}
+
+.weather-app {
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.weather-app h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  margin: 0 0 1.75rem 0;
+  font-size: 0.95rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.status {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.status.error {
+  color: var(--color-danger);
+}
+
+.matches {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.matches li {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+}
+
+.matches li:last-child {
+  border-bottom: none;
+}
+
+.matches li:hover {
+  background: var(--color-surface-alt);
+}
+
+.forecast-result {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.current-weather {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.current-icon {
+  font-size: 3rem;
+}
+
+.current-weather h2 {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.current-desc {
+  margin: 0.2rem 0 0 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.current-temp {
+  margin-left: auto;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.wind {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0 0;
+}
+
+.daily-forecast {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.day-card {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+}
+
+.day-label {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.day-icon {
+  font-size: 1.5rem;
+  display: block;
+}
+
+.day-temps {
+  margin: 0.4rem 0 0 0;
+  font-size: 0.85rem;
+}
+
+.day-temps span {
+  color: var(--color-text-muted);
+  margin-left: 0.35rem;
+}
+
+@media (max-width: 560px) {
+  .daily-forecast {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

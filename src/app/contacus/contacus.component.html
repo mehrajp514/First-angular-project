@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+
+<div class="contact-container">
+  <section class="contact-hero">
+    <h1>Get in Touch</h1>
+    <p>Questions about an order, a product, or just want to say hi? We'd love to hear from you.</p>
+  </section>
+
+  <div class="contact-wrapper">
+    <!-- Contact info -->
+    <div class="contact-info">
+      <div class="info-card card">
+        <span class="info-icon">📍</span>
+        <div>
+          <h4>Our Office</h4>
+          <p>221B Market Street, San Francisco, CA 94103</p>
+        </div>
+      </div>
+      <div class="info-card card">
+        <span class="info-icon">📞</span>
+        <div>
+          <h4>Call Us</h4>
+          <p>+1 (555) 012-3456</p>
+        </div>
+      </div>
+      <div class="info-card card">
+        <span class="info-icon">✉️</span>
+        <div>
+          <h4>Email Us</h4>
+          <p>support&#64;shophub.example</p>
+        </div>
+      </div>
+      <div class="info-card card">
+        <span class="info-icon">🕒</span>
+        <div>
+          <h4>Support Hours</h4>
+          <p>Mon–Fri, 9am–6pm PST</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact form -->
+    <div class="contact-form-card card">
+      <h2>Send us a message</h2>
+
+      <div class="alert alert-success" *ngIf="submitted">Thanks! Your message is on its way to our team.</div>
+      <div class="alert alert-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" [(ngModel)]="form.name" name="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" [(ngModel)]="form.email" name="email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" [(ngModel)]="form.subject" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea [(ngModel)]="form.message" name="message" rows="5" placeholder="How can we help?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item card" *ngFor="let faq of faqs" (click)="toggleFaq(faq)">
+        <div class="faq-question">
+          <span>{{ faq.question }}</span>
+          <span class="faq-toggle">{{ faq.open ? '−' : '+' }}</span>
+        </div>
+        <p class="faq-answer" *ngIf="faq.open">{{ faq.answer }}</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>

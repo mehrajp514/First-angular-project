@@ -1,0 +1,42 @@
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-col brand-col">
+      <h3 class="footer-logo">Shop<span>Hub</span></h3>
+      <p>Your one-stop shop for electronics, accessories, and everyday tech essentials — great prices, fast shipping.</p>
+      <div class="socials">
+        <a href="javascript:void(0)" aria-label="Twitter">🐦</a>
+        <a href="javascript:void(0)" aria-label="Instagram">📷</a>
+        <a href="javascript:void(0)" aria-label="Facebook">📘</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a routerLink="/products">All Products</a>
+      <a routerLink="/products" [queryParams]="{category: 'Electronics'}">Electronics</a>
+      <a routerLink="/products" [queryParams]="{category: 'Accessories'}">Accessories</a>
+      <a routerLink="/wishlist">Wishlist</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a routerLink="/about">About Us</a>
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="/orders">Track Orders</a>
+      <a routerLink="/weather">Weather</a>
+    </div>
+
+    <div class="footer-col newsletter-col">
+      <h4>Stay in the loop</h4>
+      <p>Get updates on new arrivals and exclusive offers.</p>
+      <form class="newsletter-form" (ngSubmit)="subscribe()">
+        <input type="email" [(ngModel)]="newsletterEmail" name="newsletterEmail" placeholder="you@example.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {{ year }} ShopHub. All rights reserved.</p>
+  </div>
+</footer>

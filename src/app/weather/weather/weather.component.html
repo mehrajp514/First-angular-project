@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<div class="weather-page">
+  <div class="weather-app card">
+    <h1>Weather Lookup</h1>
+    <p class="subtitle">Search any city to see the current conditions and a 5-day outlook.</p>
+
+    <form class="search-form" (ngSubmit)="search()">
+      <input type="text" name="city" placeholder="Enter your city…" [(ngModel)]="city" autocomplete="off">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">Search</button>
+    </form>
+
+    <p class="status" *ngIf="loading">Loading…</p>
+    <p class="status error" *ngIf="error">{{ error }}</p>
+
+    <ul class="matches" *ngIf="matches.length">
+      <li *ngFor="let match of matches" (click)="selectLoction(match)">
+        {{ match.name }}<span *ngIf="match.admin1">, {{ match.admin1 }}</span>, {{ match.country }}
+      </li>
+    </ul>
+
+    <div class="forecast-result fade-in-up" *ngIf="result">
+      <div class="current-weather">
+        <div class="current-icon">{{ weatherIcon(result.current.weathercode) }}</div>
+        <div>
+          <h2>{{ result.location.name }}<span *ngIf="result.location.admin1">, {{ result.location.admin1 }}</span></h2>
+          <p class="current-desc">{{ weatherLabel(result.current.weathercode) }}</p>
+        </div>
+        <div class="current-temp">{{ result.current.temperature }}°C</div>
+      </div>
+      <p class="wind">Wind: {{ result.current.windspeed }} km/h</p>
+
+      <div class="daily-forecast">
+        <div class="day-card" *ngFor="let day of result.daily.time; let i = index">
+          <p class="day-label">{{ dayLabel(day) }}</p>
+          <span class="day-icon">{{ weatherIcon(result.daily.weathercode[i]) }}</span>
+          <p class="day-temps">
+            <strong>{{ result.daily.temperature_2m_max[i] }}°</strong>
+            <span>{{ result.daily.temperature_2m_min[i] }}°</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,49 @@
+<div class="login-container">
+  <a routerLink="/home" class="back-home">&larr; Back to ShopHub</a>
+
+  <div class="login-card fade-in-up">
+    <div class="login-header">
+      <h1 class="logo">ShopHub</h1>
+      <p class="subtitle">Welcome back! Please login to your account.</p>
+    </div>
+
+    <div class="alert alert-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <form class="login-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="loginForm.email" name="email" required placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="loginForm.password" name="password" required placeholder="Enter your password">
+      </div>
+
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox">
+          <span>Remember me</span>
+        </label>
+        <a href="javascript:void(0)" class="forgot-password">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-login" [disabled]="submitting">
+        <span *ngIf="!submitting">Login</span>
+        <span *ngIf="submitting">Logging in&hellip;</span>
+      </button>
+    </form>
+
+    <div class="demo-hint">
+      <p>Try a demo account:</p>
+      <div class="demo-buttons">
+        <button type="button" (click)="fillDemo('john@example.com', 'password123')">Customer</button>
+        <button type="button" (click)="fillDemo('admin@example.com', 'admin123')">Admin</button>
+      </div>
+    </div>
+
+    <div class="login-footer">
+      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    </div>
+  </div>
+</div>

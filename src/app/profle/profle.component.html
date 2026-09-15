@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+
+<div class="profile-content" *ngIf="user">
+  <div class="profile-header card">
+    <div class="avatar">{{ user.name.charAt(0) }}</div>
+    <div>
+      <h1>{{ user.name }}</h1>
+      <p>{{ user.email }}</p>
+      <span class="badge-role" *ngIf="user.isAdmin">Admin</span>
+    </div>
+  </div>
+
+  <div class="profile-stats">
+    <div class="stat-card card" routerLink="/orders">
+      <h3>{{ orderCount }}</h3>
+      <p>Orders</p>
+    </div>
+    <div class="stat-card card" routerLink="/wishlist">
+      <h3>{{ wishlistCount }}</h3>
+      <p>Wishlist</p>
+    </div>
+    <div class="stat-card card" routerLink="/cart">
+      <h3>{{ cartCount }}</h3>
+      <p>In Cart</p>
+    </div>
+  </div>
+
+  <div class="profile-details card">
+    <div class="details-header">
+      <h2>Account Details</h2>
+      <button class="btn-edit" *ngIf="!editing" (click)="startEditing()">Edit</button>
+    </div>
+
+    <div class="details-view" *ngIf="!editing">
+      <div class="detail-row">
+        <span class="label">Full Name</span>
+        <span class="value">{{ user.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Email</span>
+        <span class="value">{{ user.email }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Phone</span>
+        <span class="value">{{ user.phone || '—' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Address</span>
+        <span class="value">{{ user.address || '—' }}</span>
+      </div>
+    </div>
+
+    <form class="details-edit" *ngIf="editing" (ngSubmit)="saveProfile()">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="form.name" name="name">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" [(ngModel)]="form.phone" name="phone">
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" [(ngModel)]="form.address" name="address">
+      </div>
+      <div class="edit-actions">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="button" class="btn-cancel" (click)="cancelEditing()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <button class="btn-logout" (click)="logout()">Logout</button>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<div class="about-container">
+  <!-- Hero -->
+  <section class="about-hero">
+    <div class="hero-inner fade-in-up">
+      <h1>We build shopping experiences people trust</h1>
+      <p>ShopHub started as a two-person team obsessed with getting tech gear into people's hands faster, cheaper, and with zero hassle. Today we ship thousands of orders a week — but the mission hasn't changed.</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-strip">
+    <div class="stat" *ngFor="let stat of stats">
+      <h2>{{ stat.value }}</h2>
+      <p>{{ stat.label }}</p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story-section">
+    <div class="story-text">
+      <h2 class="section-title">Our Story</h2>
+      <p>ShopHub was founded on a simple idea: buying electronics and accessories online shouldn't feel like a gamble. We curate every product ourselves, negotiate directly with manufacturers, and pass the savings straight to you.</p>
+      <p>No filler catalog, no dropshipping guesswork — just products we'd actually buy for ourselves, backed by a support team that picks up the phone.</p>
+    </div>
+    <div class="story-image">📦🚀🛒</div>
+  </section>
+
+  <!-- Values -->
+  <section class="values-section">
+    <h2 class="section-title">What We Stand For</h2>
+    <div class="values-grid">
+      <div class="value-card card" *ngFor="let value of values">
+        <span class="value-icon">{{ value.icon }}</span>
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.text }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="team-section">
+    <h2 class="section-title">Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-card card" *ngFor="let member of team">
+        <span class="avatar">{{ member.avatar }}</span>
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.role }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <h2>Ready to find your next favorite gadget?</h2>
+    <button class="btn btn-primary" routerLink="/products">Browse Products</button>
+  </section>
+</div>
+
+<app-footer></app-footer>

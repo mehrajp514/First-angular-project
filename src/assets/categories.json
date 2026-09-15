@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300",
+      "description": "Latest electronic devices and gadgets"
+    },
+    {
+      "id": 2,
+      "name": "Accessories",
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300",
+      "description": "Computer and phone accessories"
+    },
+    {
+      "id": 3,
+      "name": "Smartphones",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300",
+      "description": "Latest smartphones and tablets"
+    },
+    {
+      "id": 4,
+      "name": "Audio",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300",
+      "description": "Headphones, speakers, and audio equipment"
+    },
+    {
+      "id": 5,
+      "name": "Gaming",
+      "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300",
+      "description": "Gaming consoles and accessories"
+    },
+    {
+      "id": 6,
+      "name": "Cameras",
+      "image": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300",
+      "description": "Cameras and photography equipment"
+    }
+  ]
+}

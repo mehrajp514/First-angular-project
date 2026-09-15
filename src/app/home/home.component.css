@@ -1,0 +1,245 @@
+.home-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.banner-content h2 {
+  font-size: 2.75rem;
+  margin: 0 0 0.75rem 0;
+  color: white;
+}
+
+.banner-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.92;
+}
+
+.btn-hero {
+  background: white;
+  color: var(--color-primary);
+  border: none;
+  padding: 1rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+
+.features-strip {
+  max-width: 1200px;
+  margin: -2rem auto 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  z-index: 2;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.feature:last-child {
+  border-right: none;
+}
+
+.feature-icon {
+  font-size: 1.6rem;
+}
+
+.feature h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.feature p {
+  margin: 0.15rem 0 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.categories-section,
+.products-section {
+  max-width: 1200px;
+  margin: 3.5rem auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.75rem;
+}
+
+.category-card {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.category-card h3 {
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.75rem;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-btn.active {
+  color: var(--color-danger);
+}
+
+.product-info {
+  padding: 1rem;
+}
+
+.product-info h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.05rem;
+}
+
+.product-info .category {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.rating {
+  color: var(--color-warning);
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.btn-add-cart {
+  width: 100%;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.btn-add-cart:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 900px) {
+  .features-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature:nth-child(2) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .features-strip {
+    grid-template-columns: 1fr;
+  }
+  .feature {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .feature:last-child {
+    border-bottom: none;
+  }
+  .banner-content h2 {
+    font-size: 2rem;
+  }
+}

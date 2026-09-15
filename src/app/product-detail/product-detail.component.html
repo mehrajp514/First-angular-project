@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+
+<div class="product-detail-container" *ngIf="product">
+  <div class="breadcrumb">
+    <a routerLink="/home">Home</a> <span>/</span>
+    <a routerLink="/products">Products</a> <span>/</span>
+    <a href="javascript:void(0)" (click)="filterByCategory()">{{ product.category }}</a> <span>/</span>
+    <span class="current">{{ product.name }}</span>
+  </div>
+
+  <div class="product-content">
+    <div class="product-image-section">
+      <img [src]="product.image" [alt]="product.name">
+    </div>
+
+    <div class="product-info-section">
+      <p class="category" (click)="filterByCategory()">{{ product.category }}</p>
+      <h1 class="product-title">{{ product.name }}</h1>
+
+      <div class="rating">
+        <span *ngFor="let star of averageRating | stars">★</span>
+        <span class="rating-number">({{ averageRating }}) &middot; {{ reviews.length }} review{{ reviews.length === 1 ? '' : 's' }}</span>
+      </div>
+
+      <p class="price">${{ product.price }}</p>
+
+      <p class="description">{{ product.description }}</p>
+
+      <div class="stock-info">
+        <span class="stock-label">In Stock:</span>
+        <span class="stock-value">{{ product.stock }} units</span>
+      </div>
+
+      <div class="quantity-selector">
+        <button class="qty-btn" (click)="decreaseQuantity()">-</button>
+        <input type="number" [(ngModel)]="quantity" min="1" [max]="product.stock">
+        <button class="qty-btn" (click)="increaseQuantity()">+</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-add-cart" (click)="addToCart()">Add to Cart</button>
+        <button class="btn-buy-now" (click)="buyNow()">Buy Now</button>
+        <button class="btn-wishlist" (click)="toggleWishlist()" [class.active]="wishlistService.isInWishlist(product.id)">♥</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <section class="reviews-section">
+    <h2>Customer Reviews</h2>
+
+    <div class="review-form card">
+      <h3>Write a review</h3>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="newReview.name" placeholder="Your name" name="reviewerName">
+        <select [(ngModel)]="newReview.rating" name="reviewerRating">
+          <option [value]="5">★★★★★ Excellent</option>
+          <option [value]="4">★★★★ Good</option>
+          <option [value]="3">★★★ Average</option>
+          <option [value]="2">★★ Poor</option>
+          <option [value]="1">★ Terrible</option>
+        </select>
+      </div>
+      <textarea [(ngModel)]="newReview.comment" name="reviewerComment" placeholder="Share your thoughts about this product…" rows="3"></textarea>
+      <button class="btn btn-primary" (click)="submitReview()">Submit Review</button>
+    </div>
+
+    <div class="reviews-list" *ngIf="reviews.length > 0">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="review-header">
+          <strong>{{ review.name }}</strong>
+          <span class="review-date">{{ review.date }}</span>
+        </div>
+        <div class="rating small">
+          <span *ngFor="let star of review.rating | stars">★</span>
+        </div>
+        <p>{{ review.comment }}</p>
+      </div>
+    </div>
+
+    <p class="no-reviews" *ngIf="reviews.length === 0">No reviews yet — be the first to share your thoughts!</p>
+  </section>
+
+  <!-- Related products -->
+  <section class="related-section" *ngIf="relatedProducts.length > 0">
+    <h2>You may also like</h2>
+    <div class="related-grid">
+      <div class="related-card card" *ngFor="let item of relatedProducts" (click)="viewProduct(item.id)">
+        <img [src]="item.image" [alt]="item.name">
+        <div class="related-info">
+          <h4>{{ item.name }}</h4>
+          <p class="price">${{ item.price }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="loading" *ngIf="!product">
+  <p>Loading product details…</p>
+</div>
+
+<app-footer></app-footer>

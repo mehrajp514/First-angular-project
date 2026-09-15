@@ -1,0 +1,133 @@
+<app-navbar></app-navbar>
+
+<div class="admin-content">
+  <h1 class="page-title">Admin Dashboard</h1>
+
+  <div class="admin-tabs">
+    <button [class.active]="activeTab === 'dashboard'" (click)="setTab('dashboard')">Dashboard</button>
+    <button [class.active]="activeTab === 'products'" (click)="setTab('products')">Products</button>
+    <button [class.active]="activeTab === 'users'" (click)="setTab('users')">Users</button>
+  </div>
+
+  <!-- Dashboard tab -->
+  <div *ngIf="activeTab === 'dashboard'">
+    <div class="stats-grid">
+      <div class="stat-card card">
+        <div class="stat-icon users">👥</div>
+        <div class="stat-info">
+          <h3>Total Users</h3>
+          <p class="stat-value">{{ stats.totalUsers }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-icon sales">💰</div>
+        <div class="stat-info">
+          <h3>Total Sales</h3>
+          <p class="stat-value">${{ stats.totalSales.toFixed(2) }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-icon products">📦</div>
+        <div class="stat-info">
+          <h3>Total Products</h3>
+          <p class="stat-value">{{ stats.totalProducts }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-icon orders">🛒</div>
+        <div class="stat-info">
+          <h3>Total Orders</h3>
+          <p class="stat-value">{{ stats.totalOrders }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-orders-section">
+      <h2 class="section-title">Recent Orders</h2>
+      <div class="orders-table card">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of recentOrders">
+              <td>#{{ order.id }}</td>
+              <td>{{ order.date }}</td>
+              <td>{{ order.items.length }}</td>
+              <td>${{ order.total.toFixed(2) }}</td>
+              <td><span class="status-badge" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products tab -->
+  <div *ngIf="activeTab === 'products'">
+    <h2 class="section-title">Products ({{ products.length }})</h2>
+    <div class="orders-table card">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td class="product-cell">
+              <img [src]="product.image" [alt]="product.name">
+              {{ product.name }}
+            </td>
+            <td>{{ product.category }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ product.rating }} ★</td>
+            <td>
+              <span class="stock-badge" [class.low]="product.stock < 20">{{ product.stock }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Users tab -->
+  <div *ngIf="activeTab === 'users'">
+    <h2 class="section-title">Users ({{ users.length }})</h2>
+    <div class="orders-table card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone || '—' }}</td>
+            <td><span class="status-badge" [ngClass]="user.isAdmin ? 'status-delivered' : 'status-processing'">{{ user.isAdmin ? 'Admin' : 'Customer' }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

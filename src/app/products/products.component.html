@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+
+<div class="products-container">
+  <div class="content-wrapper">
+    <!-- Filters Sidebar -->
+    <aside class="filters-sidebar card">
+      <h3>Filters</h3>
+
+      <div class="filter-section">
+        <h4>Category</h4>
+        <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category.name">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-section">
+        <h4>Price Range</h4>
+        <div class="price-inputs">
+          <input type="number" [(ngModel)]="minPrice" (change)="applyFilters()" placeholder="Min">
+          <span>-</span>
+          <input type="number" [(ngModel)]="maxPrice" (change)="applyFilters()" placeholder="Max">
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h4>Minimum Rating</h4>
+        <select [(ngModel)]="minRating" (change)="applyFilters()">
+          <option value="0">All Ratings</option>
+          <option value="3">3+ Stars</option>
+          <option value="4">4+ Stars</option>
+          <option value="4.5">4.5+ Stars</option>
+        </select>
+      </div>
+
+      <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+    </aside>
+
+    <!-- Products Grid -->
+    <main class="products-main">
+      <div class="results-header">
+        <div>
+          <h2 class="page-title">{{ searchQuery ? 'Search results for "' + searchQuery + '"' : 'All Products' }}</h2>
+          <p class="results-count">{{ filteredProducts.length }} products found</p>
+        </div>
+
+        <div class="sort-control">
+          <label for="sortBy">Sort by</label>
+          <select id="sortBy" [(ngModel)]="sortBy" (change)="applyFilters()">
+            <option value="default">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="name">Name: A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="products-grid" *ngIf="!loading">
+        <div class="product-card card" *ngFor="let product of pagedProducts" (click)="viewProduct(product.id)">
+          <button class="wishlist-btn" (click)="toggleWishlist($event, product)" [class.active]="wishlistService.isInWishlist(product.id)">♥</button>
+          <div class="product-image">
+            <img [src]="product.image" [alt]="product.name">
+          </div>
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="category">{{ product.category }}</p>
+            <div class="rating">
+              <span *ngFor="let star of product.rating | stars">★</span>
+            </div>
+            <p class="price">${{ product.price }}</p>
+            <button class="btn-add-cart" (click)="addToCart($event, product)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-grid" *ngIf="loading">
+        <div class="product-card card" *ngFor="let s of [].constructor(8)">
+          <div class="skeleton" style="height: 200px;"></div>
+          <div class="product-info">
+            <div class="skeleton" style="height: 1rem; width: 70%; margin-bottom: 0.5rem;"></div>
+            <div class="skeleton" style="height: 0.8rem; width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination" *ngIf="!loading && totalPages > 1">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">‹ Prev</button>
+        <button *ngFor="let page of [].constructor(totalPages); let i = index"
+                [class.active]="currentPage === i + 1"
+                (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next ›</button>
+      </div>
+
+      <div class="no-products" *ngIf="!loading && filteredProducts.length === 0">
+        <p>No products found matching your filters.</p>
+        <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<app-footer></app-footer>
